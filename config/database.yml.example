@@ -1,0 +1,22 @@
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+
+development:
+  <<: *default
+  database: pug-api_development
+  username: pug-api
+  password:
+  host: localhost
+  port: 5432
+
+test:
+  <<: *default
+  database: pug-api_test
+
+production:
+  <<: *default
+  database: pug-api_production
+  username: pug-api
+  password: <%= ENV['PUG-API_DATABASE_PASSWORD'] %>
