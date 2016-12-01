@@ -20,4 +20,5 @@ group :development do
   gem 'database_cleaner'
   gem 'shoulda-matchers', '~> 3.1'
   gem 'simplecov', require: false
+  gem 'overcommit', '~> 0.37.0'
 end

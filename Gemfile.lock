@@ -41,6 +41,8 @@ GEM
     arel (7.1.4)
     ast (2.3.0)
     builder (3.2.2)
+    childprocess (0.5.9)
+      ffi (~> 1.0, >= 1.0.11)
     coderay (1.1.1)
     concurrent-ruby (1.0.2)
     database_cleaner (1.5.3)
@@ -59,6 +61,7 @@ GEM
     i18n (0.7.0)
     immigrant (0.3.5)
       activerecord (>= 3.0)
+    iniparse (1.4.2)
     json (2.0.2)
     listen (3.1.5)
       rb-fsevent (~> 0.9, >= 0.9.4)
@@ -77,6 +80,9 @@ GEM
     nio4r (1.2.1)
     nokogiri (1.6.8.1)
       mini_portile2 (~> 2.1.0)
+    overcommit (0.37.0)
+      childprocess (~> 0.5.8)
+      iniparse (~> 1.4)
     parser (2.3.3.0)
       ast (~> 2.2)
     pg (0.19.0)
@@ -179,6 +185,7 @@ DEPENDENCIES
   ffaker
   immigrant
   listen
+  overcommit (~> 0.37.0)
   pg (~> 0.18)
   pry-rails
   puma (~> 3.0)
