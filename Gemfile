@@ -5,6 +5,12 @@ gem 'rails', '~> 5.0.0', '>= 5.0.0.1'
 gem 'pg', '~> 0.18'
 gem 'puma', '~> 3.0'
 
+group :development do
+  gem 'overcommit', '~> 0.37.0'
+  gem 'brakeman', require: false
+  gem 'listen'
+end
+
 group :development, :test do
   gem 'pry-rails'
   gem 'rspec-rails', '~> 3.5', '>= 3.5.2'
@@ -15,10 +21,8 @@ group :development, :test do
   gem 'immigrant'
 end
 
-group :development do
-  gem 'listen'
+group :test do
   gem 'database_cleaner'
   gem 'shoulda-matchers', '~> 3.1'
   gem 'simplecov', require: false
-  gem 'overcommit', '~> 0.37.0'
 end
