@@ -5,5 +5,14 @@
 !/log/.keep
 !/tmp/.keep
 
+vendor/cache
+vendor/gems/
+vendor/bundle/
+
 config/secrets.yml
 config/database.yml
+
+coverage/
+
+.rspec
+*.swp

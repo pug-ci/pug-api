@@ -1,0 +1,13 @@
+require: rubocop-rspec
+Rails:
+  Enabled: true
+AllCops:
+  TargetRubyVersion: 2.3
+  CacheRootDirectory: tmp/
+  Exclude:
+    - 'db/**/*'
+    - 'vendor/**/*'
+Metrics/LineLength:
+  Max: 120
+Documentation:
+  Enabled: false
