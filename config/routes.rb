@@ -5,6 +5,8 @@ Rails.application.routes.draw do
   namespace :api, constraints: { format: :json }, defaults: { format: :json } do
     namespace :v1 do
       get 'current_user', to: 'current_user#show'
+
+      resources :repositories, only: :index
     end
   end
 end
