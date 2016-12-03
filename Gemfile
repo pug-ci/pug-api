@@ -7,6 +7,8 @@ gem 'puma', '~> 3.0'
 gem 'rack-cors'
 
 gem 'omniauth-github'
+gem 'jwt'
+gem 'active_model_serializers', '~> 0.10.0'
 
 group :development do
   gem 'overcommit', '~> 0.37.0'
