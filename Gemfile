@@ -6,6 +6,8 @@ gem 'pg', '~> 0.18'
 gem 'puma', '~> 3.0'
 gem 'rack-cors'
 
+gem 'omniauth-github'
+
 group :development do
   gem 'overcommit', '~> 0.37.0'
   gem 'brakeman', require: false
