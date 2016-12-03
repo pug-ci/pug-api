@@ -2,6 +2,9 @@
 class Repository < ApplicationRecord
   has_secure_token :token
 
+  has_many :repositories_users, dependent: :destroy
+  has_many :users, through: :repositories_users
+
   validates :github_id, :name, :url, presence: true
   validates :github_id, :token, uniqueness: true
 end

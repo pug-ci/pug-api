@@ -2,6 +2,9 @@
 class User < ApplicationRecord
   VALID_PROVIDERS = %w(github).freeze
 
+  has_many :repositories_users, dependent: :destroy
+  has_many :repositories, through: :repositories_users
+
   validates :provider, :uid, :name, :oauth_token, presence: true
   validates :provider, inclusion: VALID_PROVIDERS
   validates :provider, uniqueness: { scope: :uid }

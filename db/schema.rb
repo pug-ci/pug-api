@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161203210157) do
+ActiveRecord::Schema.define(version: 20161203215327) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -26,6 +26,16 @@ ActiveRecord::Schema.define(version: 20161203210157) do
     t.index ["token"], name: "index_repositories_on_token", unique: true, using: :btree
   end
 
+  create_table "repositories_users", force: :cascade do |t|
+    t.integer  "repository_id"
+    t.integer  "user_id"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+    t.index ["repository_id", "user_id"], name: "index_repositories_users_on_repository_id_and_user_id", unique: true, using: :btree
+    t.index ["repository_id"], name: "index_repositories_users_on_repository_id", using: :btree
+    t.index ["user_id"], name: "index_repositories_users_on_user_id", using: :btree
+  end
+
   create_table "users", force: :cascade do |t|
     t.string   "provider",         null: false
     t.string   "uid",              null: false
@@ -37,4 +47,6 @@ ActiveRecord::Schema.define(version: 20161203210157) do
     t.index ["provider", "uid"], name: "index_users_on_provider_and_uid", unique: true, using: :btree
   end
 
+  add_foreign_key "repositories_users", "repositories"
+  add_foreign_key "repositories_users", "users"
 end

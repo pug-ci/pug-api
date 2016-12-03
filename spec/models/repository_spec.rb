@@ -2,6 +2,11 @@
 require 'rails_helper'
 
 RSpec.describe Repository, type: :model do
+  describe 'validate associations' do
+    it { is_expected.to have_many(:repositories_users).dependent :destroy }
+    it { is_expected.to have_many(:users).through :repositories_users }
+  end
+
   describe 'validate attributes' do
     subject { build :repository }
 
