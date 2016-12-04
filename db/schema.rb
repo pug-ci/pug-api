@@ -10,10 +10,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161203215327) do
+ActiveRecord::Schema.define(version: 20161204000411) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "builds", force: :cascade do |t|
+    t.integer  "repository_id"
+    t.string   "status",        null: false
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+    t.index ["repository_id"], name: "index_builds_on_repository_id", using: :btree
+  end
 
   create_table "repositories", force: :cascade do |t|
     t.string   "github_id",  null: false
@@ -47,6 +55,7 @@ ActiveRecord::Schema.define(version: 20161203215327) do
     t.index ["provider", "uid"], name: "index_users_on_provider_and_uid", unique: true, using: :btree
   end
 
+  add_foreign_key "builds", "repositories"
   add_foreign_key "repositories_users", "repositories"
   add_foreign_key "repositories_users", "users"
 end

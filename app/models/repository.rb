@@ -2,6 +2,7 @@
 class Repository < ApplicationRecord
   has_secure_token :token
 
+  has_many :builds, dependent: :destroy
   has_many :repositories_users, dependent: :destroy
   has_many :users, through: :repositories_users
 
