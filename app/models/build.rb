@@ -4,13 +4,12 @@ class Build < ApplicationRecord
 
   belongs_to :repository
 
-  validates :repository, presence: true
-
   aasm column: :status, no_direct_assignment: true do
     state :pending, initial: true
     state :running
     state :passed
     state :failed
+    state :canceled
 
     event :start do
       transitions from: :pending, to: :running
@@ -22,6 +21,10 @@ class Build < ApplicationRecord
 
     event :fail do
       transitions from: :running, to: :failed
+    end
+
+    event :cancel do
+      transitions from: [:pending, :running], to: :canceled
     end
   end
 end
