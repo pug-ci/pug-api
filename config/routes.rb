@@ -6,7 +6,9 @@ Rails.application.routes.draw do
     namespace :v1 do
       get 'current_user', to: 'current_user#show'
 
-      resources :repositories, only: :index
+      resources :repositories, only: :index do
+        resources :builds, only: :index
+      end
     end
   end
 end
