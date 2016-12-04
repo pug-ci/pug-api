@@ -13,7 +13,7 @@ Rails.application.routes.draw do
         collection do
           get 'remote', to: 'repositories#remote'
         end
-        resources :builds, only: :index
+        resources :builds, only: [:show, :index]
       end
     end
   end

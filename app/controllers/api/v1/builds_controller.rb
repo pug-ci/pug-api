@@ -4,6 +4,11 @@ module Api
     class BuildsController < ApplicationController
       before_action :set_repository
 
+      def show
+        build = @repository.builds.find params[:id]
+        render json: build
+      end
+
       def index
         builds = @repository.builds.order created_at: :desc
         render json: builds
