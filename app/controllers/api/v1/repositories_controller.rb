@@ -11,6 +11,11 @@ module Api
         repositories = current_user.repositories
         render json: repositories
       end
+
+      def remote
+        github = GithubService.new current_user
+        render json: github.repositories, each_serializer: RemoteRepositorySerializer
+      end
     end
   end
 end

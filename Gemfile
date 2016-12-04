@@ -10,6 +10,7 @@ gem 'omniauth-github'
 gem 'jwt'
 gem 'active_model_serializers', '~> 0.10.0'
 gem 'aasm', '~> 4.11', '>= 4.11.1'
+gem 'octokit'
 
 group :development do
   gem 'overcommit', '~> 0.37.0'

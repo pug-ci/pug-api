@@ -7,6 +7,9 @@ Rails.application.routes.draw do
       get 'current_user', to: 'current_user#show'
 
       resources :repositories, only: [:show, :index] do
+        collection do
+          get 'remote', to: 'repositories#remote'
+        end
         resources :builds, only: :index
       end
     end
