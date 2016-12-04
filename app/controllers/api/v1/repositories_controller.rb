@@ -13,7 +13,7 @@ module Api
       end
 
       def create
-        repository = current_user.repositories.new repository_params
+        repository = current_user.repositories.build repository_params
         if repository.save
           render json: repository, status: :created
         else
