@@ -13,6 +13,6 @@ class RemoteRepositorySerializer < ActiveModel::Serializer
   end
 
   def connected
-    @instance_options[:connected_ids].include? object.id.to_s
+    @instance_options[:connected_ids].include? object.id
   end
 end

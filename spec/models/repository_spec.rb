@@ -17,5 +17,7 @@ RSpec.describe Repository, type: :model do
 
     it { is_expected.to validate_uniqueness_of(:github_id) }
     it { is_expected.to validate_uniqueness_of(:token) }
+
+    it { is_expected.to validate_numericality_of(:github_id).is_greater_than(0).only_integer }
   end
 end
