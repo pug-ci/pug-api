@@ -12,9 +12,25 @@ module Api
         render json: repositories
       end
 
+      def create
+        repository = current_user.repositories.new repository_params
+        if repository.save
+          render json: repository, status: :created
+        else
+          render json: repository.errors, status: :unprocessable_entity
+        end
+      end
+
       def remote
         github = GithubService.new current_user
-        render json: github.repositories, each_serializer: RemoteRepositorySerializer
+        connected_ids = current_user.repositories.pluck(:github_id)
+        render json: github.repositories, each_serializer: RemoteRepositorySerializer, connected_ids: connected_ids
+      end
+
+      private
+
+      def repository_params
+        params.require(:repository).permit(:github_id, :name, :url)
       end
     end
   end
