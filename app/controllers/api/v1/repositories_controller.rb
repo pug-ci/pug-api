@@ -13,8 +13,11 @@ module Api
       end
 
       def create
-        repository = current_user.repositories.build repository_params
+        repository = Repository.create repository_params
+
         if repository.save
+          current_user.repositories << repository
+          GithubClient.new(current_user).create_hook repository
           render json: repository, status: :created
         else
           render json: repository.errors, status: :unprocessable_entity
@@ -22,7 +25,7 @@ module Api
       end
 
       def remote
-        github = GithubService.new current_user
+        github = GithubClient.new current_user
         connected_ids = current_user.repositories.pluck(:github_id)
         render json: github.repositories, each_serializer: RemoteRepositorySerializer, connected_ids: connected_ids
       end
