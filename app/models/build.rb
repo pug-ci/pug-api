@@ -4,6 +4,8 @@ class Build < ApplicationRecord
 
   belongs_to :repository
 
+  validates :ref, :commit_id, :commit_url, :commit_message, :committer_username, presence: true
+
   aasm column: :status, no_direct_assignment: true do
     state :pending, initial: true
     state :running

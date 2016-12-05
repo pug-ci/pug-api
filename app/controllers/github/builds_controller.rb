@@ -5,13 +5,25 @@ module Github
 
     def create
       repository  = Repository.find_by! github_id: params[:repository][:id]
-      build       = repository.builds.new
+      build       = repository.builds.new build_params
 
       if build.save
         head :no_content
       else
         head :unprocessable_entity
       end
+    end
+
+    private
+
+    def build_params
+      {
+        ref: params[:ref],
+        commit_id: params[:head_commit][:id],
+        commit_url: params[:head_commit][:url],
+        commit_message: params[:head_commit][:message],
+        committer_username: params[:head_commit][:committer][:username]
+      }
     end
   end
 end
