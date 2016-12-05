@@ -5,5 +5,6 @@ FactoryGirl.define do
     token     { FFaker::Guid.guid }
     name      { FFaker::Name.name }
     url       { FFaker::Internet.http_url }
+    owner     { FFaker::Name.name }
   end
 end

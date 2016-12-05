@@ -33,7 +33,7 @@ module Api
       private
 
       def repository_params
-        params.require(:repository).permit(:github_id, :name, :url)
+        params.require(:repository).permit(:github_id, :name, :url, :owner)
       end
     end
   end
