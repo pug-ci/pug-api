@@ -9,7 +9,7 @@ class Build < ApplicationRecord
     state :running
     state :passed
     state :failed
-    state :canceled
+    state :cancelled
 
     event :start do
       transitions from: :pending, to: :running
@@ -24,7 +24,7 @@ class Build < ApplicationRecord
     end
 
     event :cancel do
-      transitions from: [:pending, :running], to: :canceled
+      transitions from: [:pending, :running], to: :cancelled
     end
   end
 end
