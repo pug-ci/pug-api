@@ -2,8 +2,8 @@
 class GithubClient
   WEBHOOK_EVENTS = %w(push pull_request).freeze
 
-  def initialize(user)
-    @client = Octokit::Client.new access_token: user.oauth_token
+  def initialize(oauth_token = nil)
+    @client = Octokit::Client.new access_token: oauth_token
   end
 
   def repositories

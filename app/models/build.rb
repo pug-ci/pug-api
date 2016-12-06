@@ -22,7 +22,7 @@ class Build < ApplicationRecord
     end
 
     event :fail do
-      transitions from: :running, to: :failed
+      transitions from: [:pending, :running], to: :failed
     end
 
     event :cancel do

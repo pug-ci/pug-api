@@ -10,21 +10,22 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161205004231) do
+ActiveRecord::Schema.define(version: 20161206232341) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "builds", force: :cascade do |t|
     t.integer  "repository_id"
-    t.string   "status",             null: false
-    t.datetime "created_at",         null: false
-    t.datetime "updated_at",         null: false
-    t.string   "ref",                null: false
-    t.string   "commit_id",          null: false
-    t.string   "commit_url",         null: false
-    t.string   "commit_message",     null: false
-    t.string   "committer_username", null: false
+    t.string   "status",                          null: false
+    t.datetime "created_at",                      null: false
+    t.datetime "updated_at",                      null: false
+    t.string   "ref",                             null: false
+    t.string   "commit_id",                       null: false
+    t.string   "commit_url",                      null: false
+    t.string   "commit_message",                  null: false
+    t.string   "committer_username",              null: false
+    t.jsonb    "config",             default: {}, null: false
     t.index ["repository_id"], name: "index_builds_on_repository_id", using: :btree
   end
 

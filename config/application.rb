@@ -20,6 +20,7 @@ Bundler.require(*Rails.groups)
 module PugApi
   class Application < Rails::Application
     config.eager_load_paths += %W(
+      #{config.root}/app/interactors
       #{config.root}/lib/github
       #{config.root}/lib/rabbit
     )

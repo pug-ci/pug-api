@@ -4,14 +4,8 @@ module Github
     skip_before_action :authenticate_request!, only: :create
 
     def create
-      repository  = Repository.find_by! github_id: params[:repository][:id]
-      build       = repository.builds.new build_params
-
-      if build.save
-        head :no_content
-      else
-        head :unprocessable_entity
-      end
+      result = BuildsCreator.call repository_id: params[:repository][:id], build_params: build_params
+      render json: result.message, status: result.status
     end
 
     private
