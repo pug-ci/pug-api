@@ -46,10 +46,13 @@ GEM
       tzinfo (~> 1.1)
     addressable (2.5.0)
       public_suffix (~> 2.0, >= 2.0.2)
+    amq-protocol (2.0.1)
     arel (7.1.4)
     ast (2.3.0)
     brakeman (3.4.1)
     builder (3.2.2)
+    bunny (2.6.1)
+      amq-protocol (>= 2.0.1)
     childprocess (0.5.9)
       ffi (~> 1.0, >= 1.0.11)
     coderay (1.1.1)
@@ -226,6 +229,7 @@ DEPENDENCIES
   aasm (~> 4.11, >= 4.11.1)
   active_model_serializers (~> 0.10.0)
   brakeman
+  bunny (>= 2.6.1)
   database_cleaner
   factory_girl_rails
   ffaker

@@ -21,6 +21,7 @@ module PugApi
   class Application < Rails::Application
     config.eager_load_paths += %W(
       #{config.root}/lib/github
+      #{config.root}/lib/rabbit
     )
 
     # Settings in config/environments/* take precedence over those specified here.
