@@ -7,11 +7,11 @@ class GithubClient
   end
 
   def repositories
-    @repositories ||= @client.repos
+    @repositories ||= client.repos
   end
 
   def create_hook(repository)
-    @client.create_hook(
+    client.create_hook(
       repository.github_id,
       'web',
       { url: "#{Rails.application.secrets.host}/builds", content_type: 'json' },
@@ -19,7 +19,15 @@ class GithubClient
     )
   end
 
+  def fetch_config(repository)
+    client.contents repository.github_id, path: Rails.application.secrets.config_file_path
+  rescue Octokit::NotFound
+    nil
+  end
+
   private
+
+  attr_reader :client
 
   def webhooks_url
     host = Rails.application.secrets.host
