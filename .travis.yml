@@ -6,6 +6,8 @@ branches:
   - develop
 services:
   - postgresql
+addons:
+  postgresql: '9.4'
 before_script:
   - cp config/secrets.yml.example config/secrets.yml
   - cp config/database.yml.travis config/database.yml
