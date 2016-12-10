@@ -20,7 +20,17 @@ class GithubClient
   end
 
   def fetch_config(repository)
-    client.contents repository.github_id, path: Rails.application.secrets.config_file_path
+    config = fetch_file repository, Rails.application.secrets.config_file_path
+    return nil unless config
+
+    yml_string = Base64.decode64 config[:content]
+    YAML.load yml_string
+  rescue
+    nil
+  end
+
+  def fetch_file(repository, path)
+    client.contents repository.github_id, path: path
   rescue Octokit::NotFound
     nil
   end
