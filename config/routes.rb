@@ -9,7 +9,7 @@ Rails.application.routes.draw do
     namespace :v1 do
       get 'current_user', to: 'current_user#show'
 
-      resources :repositories, only: [:show, :index, :create] do
+      resources :repositories, only: [:show, :index, :create, :destroy] do
         collection do
           get 'remote', to: 'repositories#remote'
         end

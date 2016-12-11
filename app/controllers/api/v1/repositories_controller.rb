@@ -14,14 +14,23 @@ module Api
 
       def create
         repository = Repository.create repository_params
+        hook = GithubClient.new(current_user.oauth_token).create_hook repository
+        repository.github_hook_id = hook[:id]
 
         if repository.save
           current_user.repositories << repository
-          GithubClient.new(current_user.oauth_token).create_hook repository
           render json: repository, status: :created
         else
           render json: repository.errors, status: :unprocessable_entity
         end
+      end
+
+      def destroy
+        repository = current_user.repositories.find params[:id]
+        GithubClient.new(current_user.oauth_token).remove_hook repository
+
+        repository.destroy
+        head :no_content
       end
 
       def remote
