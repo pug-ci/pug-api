@@ -2,7 +2,7 @@
 class Publisher
   def publish(message)
     connect do
-      queue = channel.queue Rails.application.secrets.build_queue_name
+      queue = channel.queue Rails.application.secrets.build_queue_name, queue_options
 
       queue.publish message
     end
@@ -22,5 +22,9 @@ class Publisher
 
   def channel
     connection.create_channel
+  end
+
+  def queue_options
+    { durable: true }
   end
 end
