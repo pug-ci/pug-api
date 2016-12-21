@@ -36,6 +36,6 @@ class BuildCreator
 
   def publish(build)
     publisher = Publisher.new
-    publisher.publish build.to_json
+    publisher.publish Rabbit::BuildSerializer.new(build).to_json
   end
 end
