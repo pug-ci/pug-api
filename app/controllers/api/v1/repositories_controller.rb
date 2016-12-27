@@ -8,32 +8,38 @@ module Api
       end
 
       def index
-        repositories = current_user.repositories
+        repositories = current_user.repositories.order(:created_at)
         render json: repositories
       end
 
-      def create
-        repository = Repository.create repository_params
+      def synchronize
+        result = GithubFetcher.call user: current_user
 
-        if repository.save
-          current_user.repositories << repository
-          GithubClient.new(current_user.oauth_token).create_hook repository
-          render json: repository, status: :created
+        if result.success?
+          render json: result.repositories
+        else
+          render json: { error: result.message }, status: result.status
+        end
+      end
+
+      def connect
+        repository = current_user.repositories.find params[:id]
+
+        if repository.update(connected: true)
+          render json: repository
         else
           render json: repository.errors, status: :unprocessable_entity
         end
       end
 
-      def remote
-        github = GithubClient.new current_user.oauth_token
-        connected_ids = current_user.repositories.pluck(:github_id)
-        render json: github.repositories, each_serializer: RemoteRepositorySerializer, connected_ids: connected_ids
-      end
+      def disconnect
+        repository = current_user.repositories.find params[:id]
 
-      private
-
-      def repository_params
-        params.require(:repository).permit(:github_id, :name, :url, :owner)
+        if repository.update(connected: false)
+          render json: repository
+        else
+          render json: repository.errors, status: :unprocessable_entity
+        end
       end
     end
   end
