@@ -9,4 +9,5 @@ class Repository < ApplicationRecord
   validates :github_id, :name, :url, :owner, presence: true
   validates :github_id, :token, uniqueness: true
   validates :github_id, numericality: { greater_than: 0, only_integer: true }
+  validates :github_webhook_id, numericality: { greater_than: 0, only_integer: true }, allow_nil: true
 end
