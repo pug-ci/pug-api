@@ -24,21 +24,23 @@ module Api
 
       def connect
         repository = current_user.repositories.find params[:id]
+        result = RepositoryConnector.call user: current_user, repository: repository
 
-        if repository.update(connected: true)
-          render json: repository
+        if result.success?
+          render json: result.repository
         else
-          render json: repository.errors, status: :unprocessable_entity
+          render json: result.message, status: :unprocessable_entity
         end
       end
 
       def disconnect
         repository = current_user.repositories.find params[:id]
+        result = RepositoryDisconnector.call user: current_user, repository: repository
 
-        if repository.update(connected: false)
-          render json: repository
+        if result.success?
+          render json: result.repository
         else
-          render json: repository.errors, status: :unprocessable_entity
+          render json: result.message, status: :unprocessable_entity
         end
       end
     end

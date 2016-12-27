@@ -19,6 +19,10 @@ class GithubClient
     )
   end
 
+  def remove_hook(repository)
+    client.remove_hook repository.github_id, repository.github_webhook_id
+  end
+
   def fetch_config(repository)
     config = fetch_file repository, Rails.application.secrets.config_file_path
     return nil unless config
