@@ -17,6 +17,4 @@ test:
 
 production:
   <<: *default
-  database: pug-api_production
-  username: pug-api
-  password: <%= ENV['PUG-API_DATABASE_PASSWORD'] %>
+  url: <%= ENV["PUG_API_DATABASE_URL"] %>
