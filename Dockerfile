@@ -17,4 +17,4 @@ EXPOSE 3000
 
 ADD . /apps/pug-api
 
-CMD bundle exec rails s
+CMD bundle exec foreman start -f Procfile

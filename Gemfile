@@ -14,6 +14,7 @@ gem 'octokit'
 gem 'bunny', '>= 2.6.1'
 gem 'sneakers'
 gem 'interactor'
+gem 'foreman'
 
 group :development do
   gem 'overcommit', '~> 0.37.0'
