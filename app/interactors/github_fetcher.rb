@@ -15,7 +15,7 @@ class GithubFetcher
   def synchronize_repository(remote_repository)
     Repository.find_or_initialize_by(github_id: remote_repository.id).tap do |repository|
       repository.name   = remote_repository.name
-      repository.url    = remote_repository.url
+      repository.url    = remote_repository.html_url
       repository.owner  = remote_repository.owner.login
       repository.save!
     end
