@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 Rails.application.routes.draw do
+  get :ping, to: 'ping#index'
+
   namespace :github, path: '' do
     get '/auth/:provider/callback', to: 'sessions#create'
     resources :builds, only: :create
