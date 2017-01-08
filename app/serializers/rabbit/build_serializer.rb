@@ -4,8 +4,6 @@ module Rabbit
     attributes :id, :status, :created_at, :ref, :commit_id, :commit_url, :commit_message, :committer_username, :config
     belongs_to :repository
 
-    def config
-      JSON.dump object.config
-    end
+    delegate :config, to: :object
   end
 end
