@@ -17,7 +17,7 @@ class Publisher
   end
 
   def connection
-    @connection ||= Bunny.new Rails.application.secrets.bunny
+    @connection ||= Bunny.new Rails.application.secrets.rabbitmq
   end
 
   def channel
