@@ -17,7 +17,7 @@ class Publisher
   end
 
   def connection
-    @connection ||= Bunny.new
+    @connection ||= Bunny.new Rails.application.secrets.bunny
   end
 
   def channel

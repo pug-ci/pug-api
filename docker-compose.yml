@@ -12,9 +12,15 @@ services:
       - "127.0.0.1:3000:3000"
     links:
       - postgres
+      - rabbitmq
     env_file: .env
   postgres:
     image: postgres:9.5
     environment:
       - POSTGRES_USER=pug-api
       - POSTGRES_PASSWORD=pug-api
+  rabbitmq:
+    image: rabbitmq:3.6.4-management
+    hostname: rabbitmq
+    ports:
+      - "15672:15672"
