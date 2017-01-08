@@ -4,4 +4,7 @@ require 'sneakers'
 config = Rails.application.secrets.rabbitmq
 amqp = "amqp://#{config[:username]}:#{config[:password]}@#{config[:host]}:#{config[:port]}"
 
-Sneakers.configure amqp: amqp
+Sneakers.configure amqp: amqp,
+                   workers: 1,
+                   prefetch: 5,
+                   threads: 5
