@@ -10,9 +10,6 @@ ENV RAILS_ENV production
 RUN gem install bundler
 RUN bundle install --without development test
 
-COPY config/database.yml.example config/database.yml
-COPY config/secrets.yml.example config/secrets.yml
-
 EXPOSE 3000
 
 ADD . /apps/pug-api
