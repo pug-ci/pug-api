@@ -16,3 +16,5 @@ coverage/
 
 .rspec
 *.swp
+
+.env
