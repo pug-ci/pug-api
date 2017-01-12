@@ -37,5 +37,8 @@ class BuildCreator
   def publish(build)
     publisher = Publisher.new
     publisher.publish Rabbit::BuildSerializer.new(build).to_json
+  rescue Bunny::TCPConnectionFailedForAllHosts
+    build.cancel!
+    context.fail! message: { error: 'Service failure' }, status: 500
   end
 end
