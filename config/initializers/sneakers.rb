@@ -8,3 +8,5 @@ Sneakers.configure amqp: amqp,
                    workers: 1,
                    prefetch: 5,
                    threads: 5
+
+Sneakers.logger = Logger.new(IO::NULL)
