@@ -31,4 +31,10 @@ class ApplicationController < ActionController::API
   def user_id_in_token?
     http_token && auth_token && auth_token[:user_id].to_i
   end
+
+  def append_info_to_payload(payload)
+    super
+    payload[:request_id] = request.uuid
+    payload[:user_id] = current_user.id if current_user
+  end
 end

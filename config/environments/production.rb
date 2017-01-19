@@ -67,10 +67,21 @@ Rails.application.configure do
   # require 'syslog/logger'
   # config.logger = ActiveSupport::TaggedLogging.new(Syslog::Logger.new 'app-name')
 
-  if ENV['RAILS_LOG_TO_STDOUT'].present?
-    logger           = ActiveSupport::Logger.new(STDOUT)
-    logger.formatter = config.log_formatter
-    config.logger = ActiveSupport::TaggedLogging.new(logger)
+  logger = Logger.new(STDOUT)
+  logger.formatter = config.log_formatter
+
+  # Enable lograge
+  config.lograge.enabled = true
+
+  config.lograge.formatter = Lograge::Formatters::Json.new
+
+  # Add custom request attributes to log entries
+  config.lograge.custom_options = lambda do |event|
+    {
+      request_id: event.payload[:request_id],
+      user_id:    event.payload[:user_id],
+      params:     event.payload[:params].except('controller', 'action', 'format').to_json
+    }
   end
 
   # Do not dump schema after migrations.

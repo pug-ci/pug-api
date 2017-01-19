@@ -15,6 +15,7 @@ gem 'bunny', '>= 2.6.1'
 gem 'sneakers'
 gem 'interactor'
 gem 'foreman'
+gem 'lograge'
 
 group :development do
   gem 'overcommit', '~> 0.37.0'
