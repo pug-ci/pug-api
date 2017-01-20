@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 module Logging
   class JsonFormatter < ::Logger::Formatter
     def call(severity, timestamp, _progname, message)
