@@ -73,6 +73,7 @@ Rails.application.configure do
   # Enable lograge
   config.lograge.enabled = true
   config.lograge.formatter = Lograge::Formatters::Json.new
+  config.lograge.logger = logger
 
   # Add custom request attributes to log entries
   config.lograge.custom_options = lambda do |event|
