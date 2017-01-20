@@ -36,10 +36,10 @@ Rails.application.configure do
 
   # Use the lowest log level to ensure availability of diagnostic information
   # when problems arise.
-  config.log_level = :debug
+  config.log_level = :info
 
   # Prepend all log lines with the following tags.
-  config.log_tags = [:request_id]
+  # config.log_tags = [:request_id]
 
   # Use a different cache store in production.
   # config.cache_store = :mem_cache_store
@@ -61,7 +61,7 @@ Rails.application.configure do
   config.active_support.deprecation = :notify
 
   # Use default logging formatter so that PID and timestamp are not suppressed.
-  config.log_formatter = ::Logger::Formatter.new
+  config.log_formatter = Logging::JsonFormatter.new
 
   # Use a different logger for distributed setups.
   # require 'syslog/logger'
@@ -72,7 +72,6 @@ Rails.application.configure do
 
   # Enable lograge
   config.lograge.enabled = true
-
   config.lograge.formatter = Lograge::Formatters::Json.new
 
   # Add custom request attributes to log entries
