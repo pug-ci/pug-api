@@ -84,6 +84,11 @@ Rails.application.configure do
     }
   end
 
+  config.lograge.before_format = lambda do |data, _payload|
+    data[:response_code] = data.delete :status
+    data
+  end
+
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
 end
